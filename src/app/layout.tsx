@@ -2,6 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
+// Supports weights 100-900
+import '@fontsource-variable/noto-serif';
+// Supports weights 200-900
+import '@fontsource-variable/source-code-pro';
+// Supports weights 100-900
+import '@fontsource-variable/inter';
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -16,7 +22,7 @@ export default function RootLayout({
 	return (
 		<ConvexAuthNextjsServerProvider>
 			<html lang="en">
-				<body>
+				<body className="w-full h-full">
 					<ConvexClientProvider>
 							{children}
 					</ConvexClientProvider>

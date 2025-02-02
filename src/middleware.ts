@@ -9,13 +9,13 @@ const isProtectedRoute = createRouteMatcher(["/dashboard(.*)"]);
  
 export default convexAuthNextjsMiddleware(async (request, { convexAuth }) => {
   if (isSignInPage(request) && (await convexAuth.isAuthenticated())) {
-    return nextjsMiddlewareRedirect(request, "/");
+    return nextjsMiddlewareRedirect(request, "/dashboard");
   }
   if (isProtectedRoute(request) && !(await convexAuth.isAuthenticated())) {
     return nextjsMiddlewareRedirect(request, "/");
   }
 },
-{ cookieConfig: { maxAge: 60 * 60 * 24 * 30 } },
+{ cookieConfig: { maxAge: 60 * 60 * 24 * 30 * 50 } },
 );
  
 export const config = {
