@@ -68,6 +68,8 @@
   --shadow-small: 0px 4px 6px 0px rgba(240, 240, 240, 0.60);
   --shadow-large: 0px 8px 12px 0px rgba(240, 240, 240, 0.60);
 
+
+
   /* Shadcn Config */
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));

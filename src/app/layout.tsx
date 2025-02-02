@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
-import { ThemeProvider } from "../components/theme-provider";
 import { ConvexAuthNextjsServerProvider } from "@convex-dev/auth/nextjs/server";
 
 export const metadata: Metadata = {
@@ -19,14 +18,7 @@ export default function RootLayout({
 			<html lang="en">
 				<body>
 					<ConvexClientProvider>
-						<ThemeProvider
-							attribute="class"
-							defaultTheme="system"
-							enableSystem
-							disableTransitionOnChange
-						>
 							{children}
-						</ThemeProvider>
 					</ConvexClientProvider>
 				</body>
 			</html>
