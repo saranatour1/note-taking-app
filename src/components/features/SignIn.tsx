@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { Google } from "../icons/Google";
 
-export function SignIn() {
+export function SignInPage() {
 	const { signIn } = useAuthActions();
 	const [step, setStep] = useState<"signUp" | "signIn">("signIn");
 	return (<form
@@ -61,7 +61,7 @@ export function SignIn() {
 				<span className="sans-text-preset-5 text-neutral-600">
 					Or log in with:
 				</span>
-				<Button type="button" className="bg-white hover:bg-white py-200 px-150 flex items-center justify-center rounded-12 border border-neutral-300 w-full h-[48px] hover:cursor-pointer">
+				<Button onClick={()=> void signIn("google",{redirectTo:'/dashboard'})} type="button" className="bg-white hover:bg-white py-200 px-150 flex items-center justify-center rounded-12 border border-neutral-300 w-full h-[48px] hover:cursor-pointer">
 					<Google />
 					<span className="px-16 text-neutral-950 text-preset-other-1 font-medium">
 						Google
@@ -74,7 +74,7 @@ export function SignIn() {
 				No account yet?
 				<button
 				type="button"
-					className="pl-025 sans-text-preset-5 hover:cursor-pointer"
+					className="pl-025 sans-text-preset-5 hover:cursor-pointer text-neutral-950"
 					onClick={() => setStep(step === "signIn" ? "signUp" : "signIn")}
 				>
 					Sign Up
