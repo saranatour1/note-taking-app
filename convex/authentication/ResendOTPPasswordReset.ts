@@ -11,7 +11,7 @@ export const ResendOTPPasswordReset = Resend({
   async sendVerificationRequest({ identifier: email, provider, token }) {
     const resend = new ResendAPI(provider.apiKey);
     const { error } = await resend.emails.send({
-      from: "My App <onboarding@resend.dev>",
+      from: "My App <onboarding@notes.saranatour.dev>",
       to: [email],
       subject: `Reset your password in My App`,
       text: "Your password reset code is " + token,
