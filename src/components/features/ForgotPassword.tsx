@@ -9,7 +9,6 @@ import { InfoCircle } from "../icons/InfoCircle";
 export const ForgotPassword = () => {
 	const { signIn } = useAuthActions();
 	const [step, setStep] = useState<"forgot" | { email: string }>("forgot");
-
 	return step === "forgot" ? (
 		<FormLayout
 			title="Forgotten your password?"
@@ -18,8 +17,9 @@ export const ForgotPassword = () => {
 			onSubmit={(event) => {
 				event.preventDefault();
 				const formData = new FormData(event.currentTarget);
-				void signIn("password", formData).then(() =>
+				void signIn("password", formData).then(() =>{
 					setStep({ email: formData.get("email") as string })
+				}
 				);
 			}}
 		>

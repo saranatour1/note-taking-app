@@ -8,6 +8,7 @@ import '@fontsource-variable/noto-serif';
 import '@fontsource-variable/source-code-pro';
 // Supports weights 100-900
 import '@fontsource-variable/inter';
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -26,6 +27,7 @@ export default function RootLayout({
 					<ConvexClientProvider>
 							{children}
 					</ConvexClientProvider>
+					<Toaster />
 				</body>
 			</html>
 		</ConvexAuthNextjsServerProvider>

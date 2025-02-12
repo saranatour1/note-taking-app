@@ -16,6 +16,8 @@ import type {
 import type * as auth from "../auth.js";
 import type * as authentication_ResendOTPPasswordReset from "../authentication/ResendOTPPasswordReset.js";
 import type * as http from "../http.js";
+import type * as notes_index from "../notes/index.js";
+import type * as notes_tables from "../notes/tables.js";
 
 /**
  * A utility for referencing Convex functions in your app's API.
@@ -29,6 +31,8 @@ declare const fullApi: ApiFromModules<{
   auth: typeof auth;
   "authentication/ResendOTPPasswordReset": typeof authentication_ResendOTPPasswordReset;
   http: typeof http;
+  "notes/index": typeof notes_index;
+  "notes/tables": typeof notes_tables;
 }>;
 export declare const api: FilterApi<
   typeof fullApi,
