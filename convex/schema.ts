@@ -1,6 +1,6 @@
 import { defineSchema } from "convex/server";
 import { authTables } from "@convex-dev/auth/server";
-import { tags, usersToNotes, notes, notesToTags } from './notes/tables';
+import { tags, usersToNotes, notes, notesToTags, tagsToUsers } from './notes/tables';
  
 const schema = defineSchema({
   ...authTables,
@@ -8,7 +8,8 @@ const schema = defineSchema({
   tags,
   usersToNotes,
   notes,
-  notesToTags
+  notesToTags,
+  tagsToUsers,
 });
  
 export default schema;
