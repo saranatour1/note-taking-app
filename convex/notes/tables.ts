@@ -11,7 +11,7 @@ export const notesObject = {
 	title: v.string(),
 	description: v.optional(v.string()),
 	isArchived: v.boolean(),
-	updatedAt: v.number(),
+	updatedAt: v.optional(v.number()),
 };
 
 export const tags = defineTable(tagsObject).index("by_title", ["title"]);

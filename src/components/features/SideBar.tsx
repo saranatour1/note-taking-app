@@ -14,10 +14,10 @@ export const SideBar = async()=> {
       <Logo/>
     </div>
     <div className="w-full">
-      <SideBarLinks href={'/dashboard'} icon={<Home />} title={'All Notes'} />
-      <SideBarLinks href={'/archived'} icon={<Archive />} title={'Archived'} />    
-      <hr className="text-neutral-200"/>
+      <SideBarLinks href={'/notes'} icon={<Home />} title={'All Notes'} />
+      <SideBarLinks href={'/notes?archived'} param="archived" hasSearchParams={true} icon={<Archive />} title={'Archived'} />    
     </div>
+      <hr className="text-neutral-200 space-y-100 w-full"/>
     <Tags preloadedTags={tags}/>
   </aside>
 }

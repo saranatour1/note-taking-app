@@ -2,21 +2,32 @@
 import { cn } from "@/lib/utils";
 import { Url } from "next/dist/shared/lib/router/router";
 import Link from "next/link"
-import { usePathname } from 'next/navigation'
-import { ReactNode } from "react";
+import { usePathname, useSearchParams } from 'next/navigation'
+import { ReactNode, useMemo } from "react";
 import { ChevronRightMD } from "../icons/ChevronRightMD";
 
  interface SideBarLinkProps{
   href:Url;
   title:string;
   icon:ReactNode;
+  hasSearchParams?:boolean;
+  param?:string;
  }
 
-export const SideBarLinks = ({ href,title, icon }: SideBarLinkProps) => {
+export const SideBarLinks = ({ href,title, icon , hasSearchParams=false, param=''}: SideBarLinkProps) => {
   const pathname = usePathname()
-  return (<Link className={cn(['w-full px-150 py-[10px] flex items-center self-stretch rounded-8 gap-100', pathname.includes(href.toString()) ? 'bg-neutral-100':''])} href={href}>
+  const searchParams = useSearchParams();
+  
+   const active = useMemo(()=>{
+    const hasParam = searchParams.has(param)
+    return hasSearchParams
+    ? hasParam
+    : pathname.startsWith(href.toString());
+   },[hasSearchParams, param,href,pathname,searchParams])
+
+  return (<Link className={cn(['w-full px-150 py-[10px] flex items-center self-stretch rounded-8 gap-100', active ? 'bg-neutral-100':''])} href={href}>
       {icon}
       <span className={cn(["sans-text-preset-4 text-neutral-700"])}>{title}</span>
-      {pathname.includes(href.toString()) && <ChevronRightMD />}
+      {active && <ChevronRightMD />}
   </Link>)
 }

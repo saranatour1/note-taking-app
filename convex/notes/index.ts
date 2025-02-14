@@ -42,7 +42,7 @@ export const viewer = query({
 			return { ...doc, tags: tagsInNote };
 		});
 
-		return notesWithTags;
+		return notesWithTags.reverse();
 	},
 });
 
@@ -158,5 +158,26 @@ export const toggleArchived = mutation({
 		}
 
 		return await ctx.db.patch(args_0.noteId, { isArchived: args_0.state });
+	},
+});
+
+export const viewNote = query({
+	args: { noteId: v.string() },
+	handler: async (ctx, args_0) => {
+		const noteId = ctx.db.normalizeId("notes", args_0.noteId);
+		if (!noteId) {
+			throw new ConvexError("note not found");
+		}
+		const note = await ctx.db.get(noteId);
+
+		const notesToTags = await ctx.db
+			.query("notesToTags")
+			.withIndex("by_notesId_tagId", (q) => q.eq("noteId", noteId))
+			.collect();
+
+		const tags = await asyncMap(notesToTags, async (doc) => {
+			return await ctx.db.get(doc.tagId);
+		});
+		return { ...note, tags };
 	},
 });
