@@ -42,7 +42,7 @@ export const viewer = query({
 			return { ...doc, tags: tagsInNote };
 		});
 
-		return notesWithTags.reverse();
+		return notesWithTags;
 	},
 });
 
