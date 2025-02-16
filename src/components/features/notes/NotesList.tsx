@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Fragment } from "react";
 
 interface Props {
 	notes: FunctionReturnType<typeof api.notes.index.viewer>;
@@ -16,6 +17,7 @@ export const NotesList = ({ notes }: Props) => {
 			{notes &&
 				notes.length > 0 &&
 				notes.map((note) => (
+					<Fragment key={note?._id}>					
 					<Link
 						href={`/notes/${note?._id}`}
 						className={cn([
@@ -24,7 +26,6 @@ export const NotesList = ({ notes }: Props) => {
 								? "bg-neutral-100"
 								: "bg-white",
 						])}
-						key={note?._id}
 					>
 						<span className="sans-text-preset-3 text-neutral-950 font-semibold">
 							{note?.title}
@@ -44,8 +45,9 @@ export const NotesList = ({ notes }: Props) => {
 						<span className="sans-text-preset-6 text-neutral-700">
 							{formatDate(note?._creationTime ?? 0)}
 						</span>
-						<hr className="w-full text-neutral-200" />
 					</Link>
+						<hr className="w-full text-neutral-200" />
+					</Fragment>
 				))}
 		</ScrollArea>
 	);

@@ -3,7 +3,7 @@ import { api } from "../../../../convex/_generated/api";
 import Tiptap from "./Editor";
 import { TagIcon } from "@/components/icons/TagIcon";
 import { TagsInput } from "@/components/ui/tags-input";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { CircleClock } from "@/components/icons/CircleClock";
 import { Button } from "@/components/ui/button";
 import { saveNote } from "@/lib/actions";
@@ -23,6 +23,7 @@ export const Content = ({ noteId,noteData }: Props) => {
 	const note = usePreloadedQuery(noteData)
 	const [tags, setTags] = useState<string[]>(note.tags.map(i=> i?.title).filter((i): i is string => i !== undefined && i !== '') || []);
 	return (
+		<div className="w-full flex items-start justify-start">
 		<form action={async() => await saveNote({title:title != '' ? title:(note.title ?? 'untitled note'), tags:tags.length>0 ? tags:(note?.tags?.map(t=>t?.title ?? 'untitled note') ?? []) ,description:description !=="" ? description:(note?.description ?? 'Start typing..') , noteId:note?._id})} className="w-full col-auto py-200 px-300 flex flex-col items-start gap-200">
 				{note && <Tiptap
 					value={note?.title ==='' ? `Enter a new Title..`:note?.title}
@@ -85,5 +86,18 @@ export const Content = ({ noteId,noteData }: Props) => {
 				</Button>
 			</div>
 		</form>
+			<div className="flex flex-col pt-250 pl-200 gap-150">
+				
+			</div>			
+		</div>
 	);
 };
+
+type MenuButtonProps = { title:string, onClick:()=> void, icon: ReactNode }
+export const MenuButton = ({title, onClick,icon}:MenuButtonProps)=>{
+
+	return (<Button className="px-200 py-150 flex items-center gap-100 border border-neutral-300 rounded-8" onClick={onClick}>
+		{icon}
+		<span className="sans-text-preset-4 text-neutral-950">{title}</span>
+	</Button>)
+}
