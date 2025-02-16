@@ -20,6 +20,14 @@ if(!noteId) return;
       }
     }
   },{token:await convexAuthNextjsToken()})
+  
+  // update the tags for the same note Id
+  if(tags){
+    await fetchMutation(api.notes.tags.update,{
+      tags:tags.map(t=> ({title:t})),
+      noteId:noteId
+    },{token:await convexAuthNextjsToken()})
+  }
 
   revalidatePath(`/notes/${noteId}`)
 // update tags here

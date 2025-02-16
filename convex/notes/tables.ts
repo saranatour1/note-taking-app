@@ -6,6 +6,12 @@ export const tagsObject = {
 	color: v.optional(v.string()),
 	description: v.optional(v.string()),
 };
+export const tagsObjectWithId = {
+	...tagsObject,
+	_id:v.optional(v.id('tags'))
+}
+
+
 
 export const notesObject = {
 	title: v.string(),

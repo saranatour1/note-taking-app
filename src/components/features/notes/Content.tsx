@@ -1,6 +1,5 @@
-"use client";
+"use client";;
 import { api } from "../../../../convex/_generated/api";
-import { useQuery } from "convex-helpers/react/cache";
 import Tiptap from "./Editor";
 import { TagIcon } from "@/components/icons/TagIcon";
 import { TagsInput } from "@/components/ui/tags-input";
@@ -9,23 +8,22 @@ import { CircleClock } from "@/components/icons/CircleClock";
 import { Button } from "@/components/ui/button";
 import { saveNote } from "@/lib/actions";
 import { formatDate } from './NotesList';
+import { Preloaded, usePreloadedQuery } from "convex/react";
 
 interface Props {
 	noteId: string;
+	noteData:Preloaded<typeof api.notes.index.viewNote>;
 }
 
-export const Content = ({ noteId }: Props) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const Content = ({ noteId,noteData }: Props) => {
 	const [title,setTitle] = useState<string>('')
 	const [description, setDescription] = useState<string>('')
-	const [tags, setTags] = useState<string[]>([]);
 	
-	const note = useQuery(
-		api.notes.index.viewNote,
-		noteId ? { noteId: noteId } : "skip"
-	);
-
+	const note = usePreloadedQuery(noteData)
+	const [tags, setTags] = useState<string[]>(note.tags.map(i=> i?.title).filter((i): i is string => i !== undefined && i !== '') || []);
 	return (
-		<form action={async() => await saveNote({title:title,tags:tags,description:description, noteId:note?._id})} className="w-full col-auto py-200 px-300 flex flex-col items-start gap-200">
+		<form action={async() => await saveNote({title:title != '' ? title:(note.title ?? 'untitled note'), tags:tags.length>0 ? tags:(note?.tags?.map(t=>t?.title ?? 'untitled note') ?? []) ,description:description !=="" ? description:(note?.description ?? 'Start typing..') , noteId:note?._id})} className="w-full col-auto py-200 px-300 flex flex-col items-start gap-200">
 				{note && <Tiptap
 					value={note?.title ==='' ? `Enter a new Title..`:note?.title}
 					disableEnter={true}
