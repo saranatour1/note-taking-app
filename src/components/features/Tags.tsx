@@ -22,7 +22,7 @@ export const Tags = ({ preloadedTags }: Props) => {
 				<SideBarLinks
 					key={tag?._id}
 					title={tag?.title ?? ""}
-					href={""}
+					href={`/notes?q=${tag?.title}`}
 					icon={<TagIcon />}
 				/>
 			))}

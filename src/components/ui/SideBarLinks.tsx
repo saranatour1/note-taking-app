@@ -18,12 +18,18 @@ export const SideBarLinks = ({ href,title, icon , hasSearchParams=false, param='
   const pathname = usePathname()
   const searchParams = useSearchParams();
   
-   const active = useMemo(()=>{
-    const hasParam = searchParams.has(param)
-    return hasSearchParams
-    ? hasParam
-    : pathname.startsWith(href.toString());
-   },[hasSearchParams, param,href,pathname,searchParams])
+  const active = useMemo(() => {
+    const basePathActive = pathname.startsWith(href.toString());
+    
+    if (hasSearchParams && param) {
+      return basePathActive && searchParams.has(param); 
+    }
+    console.log(basePathActive, searchParams.entries().toArray())
+    return basePathActive;
+  }, [hasSearchParams, param, href, pathname, searchParams]);
+
+
+
 
   return (<Link className={cn(['w-full px-150 py-[10px] flex items-center self-stretch rounded-8 gap-100', active ? 'bg-neutral-100':''])} href={href}>
       {icon}
