@@ -56,6 +56,7 @@ export async function archiveNote({ noteId, state }: { state: boolean; noteId: I
 		},
 		{ token: await convexAuthNextjsToken() }
 	);
+	revalidatePath('/notes')
 }
 
 export async function deleteNote({ noteId }: { noteId: Id<"notes"> | undefined }) {
@@ -67,4 +68,5 @@ export async function deleteNote({ noteId }: { noteId: Id<"notes"> | undefined }
 		},
 		{ token: await convexAuthNextjsToken() }
 	);
+	revalidatePath(`/notes`)
 }

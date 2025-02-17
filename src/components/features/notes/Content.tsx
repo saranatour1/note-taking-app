@@ -26,7 +26,7 @@ export const Content = ({ noteId,noteData }: Props) => {
 	const [tags, setTags] = useState<string[]>(note.tags.map(i=> i?.title).filter((i): i is string => i !== undefined && i !== '') || []);
 	return (
 		<>
-		<form action={async() => await saveNote({title:title != '' ? title:(note.title ?? 'untitled note'), tags:tags.length>0 ? tags:(note?.tags?.map(t=>t?.title ?? 'untitled note') ?? []) ,description:description !=="" ? description:(note?.description ?? 'Start typing..') , noteId:note?._id})} className="w-full py-200 px-300 flex flex-col items-start gap-200">
+		<form action={async() => await saveNote({title:title != '' ? title:(note.title ?? 'untitled note'), tags:tags.length>0 ? tags:(note?.tags?.map(t=>t?.title ?? 'untitled note') ?? []) ,description:description !=="" ? description:(note?.description ?? 'Start typing..') , noteId:note?._id})} className="w-full py-200 px-300 flex flex-col items-start">
 				{note && <Tiptap
 					value={note?.title ==='' ? `Enter a new Title..`:note?.title}
 					disableEnter={true}

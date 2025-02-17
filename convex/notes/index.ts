@@ -133,18 +133,19 @@ export const destroy = mutation({
 			.query("notesToTags")
 			.withIndex("by_notesId_tagId", (q) => q.eq("noteId", args_0.noteId))
 			.collect();
+		await asyncMap(notesToTags,async(doc)=>{
 
-		const tagsToUsers = await ctx.db
-			.query("tagsToUsers")
-			.withIndex("by_userId_tagId", (q) => q.eq("userId", userId))
-			.collect();
+			const tagsToUsers = await ctx.db
+				.query("tagsToUsers")
+				.withIndex("by_userId_tagId", (q) => q.eq("userId", userId).eq('tagId', doc.tagId))
+				.first();
+			if(tagsToUsers){
+				await ctx.db.delete(tagsToUsers._id)
+			}	
+		})
 
 		for (const noteTag of notesToTags) {
 			await ctx.db.delete(noteTag._id);
-		}
-
-		for (const userTag of tagsToUsers) {
-			await ctx.db.delete(userTag._id);
 		}
 	},
 });
