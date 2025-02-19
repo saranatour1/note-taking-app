@@ -19,6 +19,10 @@ interface Props {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const Content = ({ noteId,noteData }: Props) => {
+	
+	const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+	const [archiveModalOpen, setArchiveModelOpen] = useState(false)
+
 	const [title,setTitle] = useState<string>('')
 	const [description, setDescription] = useState<string>('')
 	
