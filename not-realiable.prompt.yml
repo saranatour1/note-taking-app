@@ -1,0 +1,6 @@
+messages:
+  - role: system
+    content: You are a helpful assistant that summarizes project into useful readme
+  - role: user
+    content: 'summerize the note-taking app project to become a work-sample readme. '
+model: openai/gpt-4o
