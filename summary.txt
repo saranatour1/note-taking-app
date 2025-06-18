@@ -1,0 +1,20 @@
+Business Problem the Project Solves
+-----------------------------------
+This project provides a web-based note-taking application with support for user authentication, note creation, editing, tagging, and archiving. It enables users to organize and manage notes efficiently, supporting multiple tags per note and real-time updates.
+
+Why These Certain Technologies Were Chosen
+------------------------------------------
+- **Next.js** was selected for its robust server-side rendering, routing, and React integration, enabling fast and scalable web applications.
+- **Convex** was chosen as a backend-as-a-service to simplify real-time data management, authentication, and database operations without manual backend infrastructure.
+- **TypeScript** provides type safety, reducing runtime errors and improving code maintainability.
+- **Tailwind CSS** allows rapid UI development with utility classes, ensuring consistent styling.
+- **Radix UI** and **Lucide React** offer accessible, customizable UI primitives and icons, accelerating frontend development.
+- **@convex-dev/auth** integrates authentication providers seamlessly with Convex.
+
+Benefits to the Business
+------------------------
+- **Faster Development Time**: Using Convex and Next.js reduces the need for custom backend and authentication logic, allowing rapid prototyping and iteration.
+- **Real-Time Collaboration**: Convex enables real-time data updates, improving user experience and collaboration potential.
+- **Scalability**: The stack supports scaling to more users with minimal infrastructure changes.
+- **Maintainability**: TypeScript and modular code structure improve long-term maintainability and reduce bugs.
+- **Reduced Operational Overhead**: Backend-as-a-service and managed authentication reduce the need for dedicated backend and DevOps resources.

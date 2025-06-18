@@ -1,36 +1,58 @@
+# Note Taking App
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Technologies Used in the Project
 
-First, run the development server:
+- **Next.js**: React-based web framework for server-side rendering and routing.
+- **Convex**: Backend-as-a-service for real-time data and authentication.
+- **TypeScript**: Static type checking for JavaScript.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **Radix UI**: Accessible UI primitives (used for components like Toasts and ScrollArea).
+- **Lucide React**: Icon library.
+- **@convex-dev/auth**: Authentication provider integration for Convex.
+- **@fontsource-variable**: Variable font support for Inter, Noto Serif, and Source Code Pro.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Configuring the Project
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Environment Variables**:  
+   - Set `NEXT_PUBLIC_CONVEX_URL` in your environment to your Convex deployment URL.
+2. **Convex Setup**:  
+   - Install Convex CLI: `npm install -g convex`
+   - Initialize Convex in the project if not already done: `npx convex init`
+   - Push schema and functions: `npx convex push`
+3. **Fonts**:  
+   - Fonts are imported via `@fontsource-variable` packages in the codebase.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Running the Project in Development Mode
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Install dependencies:
+   ```sh
+   npm install
+   ```
+2. Start the Next.js development server:
+   ```sh
+   npm run dev
+   ```
+3. Start the Convex dev server (in a separate terminal):
+   ```sh
+   npx convex dev
+   ```
+4. Access the app at [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+## Deploying the Project on Vercel
 
-To learn more about Next.js, take a look at the following resources:
+1. Push your code to a Git repository (e.g., GitHub).
+2. Import the repository into Vercel.
+3. Set the `NEXT_PUBLIC_CONVEX_URL` environment variable in the Vercel dashboard to your Convex deployment URL.
+4. Vercel will handle build and deployment automatically.
+5. Ensure Convex is deployed and accessible from your Vercel deployment.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Pitfalls to Be Aware Of
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Environment Variables**: Missing or incorrect `NEXT_PUBLIC_CONVEX_URL` will break Convex connectivity.
+- **Convex Schema Changes**: After modifying Convex schema or functions, always run `npx convex push`.
+- **Authentication**: Convex authentication relies on correct provider setup; misconfiguration can prevent user login.
+- **Data Consistency**: Tag and note relationships are managed via multiple tables; ensure mutations handle all related tables to avoid orphaned records.
+- **Server/Client Boundaries**: Some components and hooks are server-only or client-only; incorrect usage may cause runtime errors.
+- **Font Loading**: If fonts do not load, ensure `@fontsource-variable` packages are installed and imported.
